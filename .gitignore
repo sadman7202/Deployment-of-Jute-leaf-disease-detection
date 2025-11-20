@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+*.tflite
+!mobilenetv2_balanced.tflite
