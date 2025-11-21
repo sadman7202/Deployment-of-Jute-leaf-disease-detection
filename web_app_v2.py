@@ -69,7 +69,7 @@ def predict_image(image_bytes):
 @app.route('/')
 def index():
     # Rendering the new v2 template
-    return render_template('index_v2.html')
+    return render_template('new_index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
