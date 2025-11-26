@@ -67,17 +67,21 @@
         <div class="container max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-start">
 
             <!-- Left Column: Upload & Preview -->
-            <div class="glass rounded-3xl p-8 w-full transition-all duration-500 hover:shadow-emerald-200/50">
+            <div
+                class="glass rounded-3xl p-8 w-full min-h-[520px] transition-all duration-500 hover:shadow-emerald-200/50">
+
                 <h2 class="text-2xl font-bold text-emerald-800 mb-6 text-center">Upload Leaf Image</h2>
 
                 <!-- Upload Area -->
                 <div id="drop-zone"
-                    class="border-3 border-dashed border-emerald-300/60 rounded-2xl p-10 text-center cursor-pointer hover:bg-emerald-50/50 transition-all duration-300 relative group bg-white/40">
+                    class="border-3 border-dashed border-emerald-300/60 rounded-2xl p-10 min-h-[320px] text-center cursor-pointer hover:bg-emerald-50/50 transition-all duration-300 relative group bg-white/40">
+
                     <input type="file" id="file-input" class="hidden" accept="image/*">
 
-                    <div id="upload-prompt" class="flex flex-col items-center transition-all duration-300">
+                    <div id="upload-prompt" class="flex flex-col items-center gap-3 transition-all duration-300">
+
                         <div
-                            class="w-20 h-20 bg-emerald-100/50 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            class="w-20 h-20 bg-emerald-100/50 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
                             <svg class="w-10 h-10 text-emerald-600" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -85,11 +89,21 @@
                                 </path>
                             </svg>
                         </div>
+
                         <p class="text-lg font-semibold text-emerald-900">Click or Drag Image</p>
-                        <p class="text-sm text-emerald-600/80 mt-1">Supports JPG, PNG</p>
+                        <p class="text-sm text-emerald-600/80 -mt-2">Supports JPG, PNG</p>
+
+                        <!-- CAMERA BUTTON -->
+                        <button id="camera-btn"
+                            class="mt-3 px-5 py-2 bg-emerald-600 text-white rounded-full shadow hover:bg-emerald-700 transition">
+                            📷 Open Camera
+                        </button>
+
                     </div>
 
-                    <!-- Image Preview -->
+                    <!-- Hidden Camera Input -->
+                    <input type="file" id="camera-input" class="hidden" accept="image/*" capture="environment" <!--
+                        Image Preview -->
                     <div id="preview-container"
                         class="hidden absolute inset-0 p-4 flex flex-col items-center justify-center bg-white/90 rounded-2xl z-20">
                         <img id="preview-image" class="max-h-48 rounded-lg shadow-md object-cover mb-4" src=""
@@ -185,7 +199,7 @@
 
     <!-- Footer -->
     <footer class="relative z-10 text-center py-6 text-emerald-900/60 text-sm font-medium">
-        <p>&copy; 2024 JuteGuard AI Project</p>
+        <p>🌱 Growing Better Everyday — JuteGuard AI (Development Build)</p>
     </footer>
 
     <!-- About Modal -->
@@ -400,6 +414,21 @@
                 analyzeBtn.classList.remove('hidden');
             }
         });
+        const cameraBtn = document.getElementById("camera-btn");
+        const cameraInput = document.getElementById("camera-input");
+
+        // When camera button clicked → open phone/PC camera
+        cameraBtn.addEventListener("click", () => {
+            cameraInput.click();
+        });
+
+        // When a photo is taken → load it like a normal upload
+        cameraInput.addEventListener("change", (e) => {
+            if (e.target.files.length) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
     </script>
 </body>
 
